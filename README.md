@@ -1,2 +1,3 @@
 # FiguDream
-Site d'ecormmerce de figurine d'iverse
+
+Site d'e-commerce de figurine diverse
