@@ -1,7 +1,7 @@
 <?php
 # $pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=nmondeteguy_pro', 'nmondeteguy_pro', 'nmondeteguy_pro');
 
-$pdo = new PDO('mysql:host=localhost;dbname=nmondeteguy_pro', 'root', '');
+$pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=nmondeteguy_pro', 'nmondeteguy_pro', 'nmondeteguy_pro');
 ?>
 
 <!DOCTYPE html>
