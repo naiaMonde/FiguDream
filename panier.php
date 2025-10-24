@@ -46,8 +46,7 @@ $pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=nmondeteguy_
             <div class="card mb-3">
                 <ul class="list-unstyled list-group-flush list-group">
                     <?php
-
-                    if (isset($_SESSION)) {
+                    if (isset($_SESSION) && sizeof($_SESSION) != 0) {
                         $prixTotal = 0;
                         foreach ($_SESSION['panier'] as $id):
                             $sql = "SELECT * FROM Figurine F WHERE F.id=:id ";
@@ -72,13 +71,15 @@ $pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=nmondeteguy_
                                     </div>
                             </li>
                     <?php endforeach;
-                    } ?>
+                     ?>
                     <div class="card-footer">
                         <h1>Total</h1>
                         <h4><?= htmlspecialchars($prixTotal ?? '') ?> €</h4>
                         <a href="paiement.php?id=<?= $prixTotal ?>">
                             <button class="btn btn-primary mb-2 ml-2" type="button">Payer</button>
                         </a>
+                    <?}
+                    else{echo "<h1>Panier vide</h1>" ;}?>
                     </div>
         </section>
         </ul>

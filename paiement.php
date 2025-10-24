@@ -1,4 +1,8 @@
 <?php
+session_start();
+//Connection à la base
+$pdo = new PDO('mysql:host=lakartxela.iutbayonne.univ-pau.fr;dbname=nmondeteguy_pro', 'nmondeteguy_pro', 'nmondeteguy_pro');
+
 $prix = $_GET['id'];
 $ok = false;
 ?>
@@ -106,15 +110,28 @@ $ok = false;
         if (strlen($cvv) < 3 || strlen($cvv) > 4 || !ctype_digit($cvv)) {
             $errors[] = 'CVV invalide (3 ou 4 chiffres).';
         }
-        var_dump($errors);
         if (sizeof($errors) == 0) {
             $ok = true;
         }
     }
     if ($ok == true) { ?>
-        <p>Paiement effectué avec succès.</p>
-    <?php } else { ?>
-        <p>Paiement refusé.</p>
+        <h4>Paiement effectué avec succès.</h4>
+        <?
+            foreach($_SESSION['panier'] as $fig){
+                $idFig = $fig;
+                $sql = "UPDATE Figurine SET quantite = quantite -1  WHERE id = ?";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$idFig]);
+            }
+
+        ?>
+    <?php } else if($ok == false && !empty($_POST)){ ?>
+        <h4>Paiement refusé.</h4>
+        <? foreach ($errors as $error){
+            echo "<p>$error</p>";
+        }
+            
+        ?>
     <?php }
 
     ?>
